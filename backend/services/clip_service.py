@@ -5,19 +5,50 @@ import numpy as np
 import logging
 from io import BytesIO
 import base64
+import os # Added import for os
 
 logger = logging.getLogger(__name__)
 
 class CLIPService:
     def __init__(self):
-        logger.info("Cargando modelo CLIP...")
+        logger.info("Inicializando CLIPService...")
+        self.model = None
+        self.processor = None
+        # Determine device, but don't load model yet
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(self.device)
-        self.processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
-        logger.info(f"✓ CLIP cargado en {self.device}")
+        self.model_name = "openai/clip-vit-base-patch32"
+        
+        # En entornos con poca RAM (como Render Free), no cargamos el modelo al inicio
+        # El modelo se cargará bajo demanda si LOW_RAM_MODE no es 'true' o 'all'
+        if os.environ.get('LOW_RAM_MODE', 'true').lower() == 'false':
+            self._load_model()
+        logger.info(f"CLIPService inicializado. Device: {self.device}. LOW_RAM_MODE: {os.environ.get('LOW_RAM_MODE', 'true')}")
+
+    def _load_model(self):
+        """Carga el modelo solo si es necesario y aún no está cargado."""
+        if self.model is None:
+            try:
+                logger.info(f"Cargando modelo CLIP: {self.model_name} en {self.device}...")
+                self.model = CLIPModel.from_pretrained(self.model_name).to(self.device)
+                self.processor = CLIPProcessor.from_pretrained(self.model_name)
+                logger.info("Modelo CLIP cargado exitosamente.")
+            except Exception as e:
+                logger.error(f"Error cargando CLIP: {e}")
+                self.model = None # Ensure model is None if loading fails
+                self.processor = None
     
     def generate_image_embedding(self, image_data):
         """Genera embedding visual de una imagen usando CLIP"""
+        # Check LOW_RAM_MODE for total deactivation
+        if os.environ.get('LOW_RAM_MODE', 'true').lower() == 'all':
+            logger.warning("CLIP embedding deshabilitado por LOW_RAM_MODE='all'.")
+            return None
+
+        self._load_model() # Attempt to load model if not already loaded
+        if not self.model:
+            logger.error("No se pudo cargar el modelo CLIP. No se puede generar el embedding.")
+            return None
+
         try:
             # Cargar imagen según el tipo de entrada
             if isinstance(image_data, str):
