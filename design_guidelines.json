@@ -1,0 +1,134 @@
+{
+  "identity": {
+    "name": "E1",
+    "role": "The Anti-AI Designer",
+    "philosophy": "Fusion over Imitation. Emotion First. Content is King.",
+    "archetype": "Editorial Utility (Fashion x Data)"
+  },
+  "design_system": {
+    "theme": {
+      "mode": "light",
+      "strategy": "High Contrast Swiss with Organic Accents",
+      "base_colors": {
+        "background": "#FFFFFF",
+        "foreground": "#0F172A",
+        "card": "#FFFFFF",
+        "card_foreground": "#0F172A",
+        "popover": "#FFFFFF",
+        "popover_foreground": "#0F172A",
+        "primary": "#044736",
+        "primary_foreground": "#FFFFFF",
+        "secondary": "#F1F5F9",
+        "secondary_foreground": "#0F172A",
+        "muted": "#F8FAFC",
+        "muted_foreground": "#64748B",
+        "accent": "#D4FF33",
+        "accent_foreground": "#044736",
+        "destructive": "#EF4444",
+        "destructive_foreground": "#FFFFFF",
+        "border": "#E2E8F0",
+        "input": "#E2E8F0",
+        "ring": "#044736"
+      },
+      "chart_colors": {
+        "chart_1": "#044736",
+        "chart_2": "#D4FF33",
+        "chart_3": "#0F172A",
+        "chart_4": "#94A3B8",
+        "chart_5": "#E2E8F0"
+      }
+    },
+    "typography": {
+      "font_family_heading": "Manrope, sans-serif",
+      "font_family_body": "Inter, sans-serif",
+      "scale": {
+        "h1": "text-4xl md:text-5xl font-bold tracking-tight",
+        "h2": "text-3xl font-semibold tracking-tight",
+        "h3": "text-2xl font-semibold tracking-tight",
+        "body": "text-base font-normal leading-relaxed",
+        "small": "text-sm font-medium text-muted-foreground",
+        "tiny": "text-xs font-bold uppercase tracking-widest text-muted-foreground"
+      }
+    },
+    "spacing": {
+      "container_padding": "p-6 md:p-8 lg:p-12",
+      "section_gap": "gap-8",
+      "component_gap": "gap-4",
+      "radius": "rounded-none md:rounded-lg"
+    },
+    "visual_enhancers": {
+      "borders": "border border-border",
+      "shadows": "shadow-sm hover:shadow-md transition-shadow duration-300",
+      "glassmorphism": "bg-white/80 backdrop-blur-md border-b border-white/20",
+      "gradients": "None. Use solid blocks of color."
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6 rounded-md font-medium transition-all active:scale-95",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-6 rounded-md font-medium",
+      "outline": "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground h-10 px-6 rounded-md font-medium",
+      "ghost": "hover:bg-accent hover:text-accent-foreground h-10 px-4 rounded-md"
+    },
+    "cards": {
+      "default": "bg-card text-card-foreground border border-border rounded-xl p-6 shadow-sm",
+      "interactive": "bg-card text-card-foreground border border-border rounded-xl p-6 shadow-sm hover:border-primary/50 transition-colors cursor-pointer"
+    },
+    "inputs": {
+      "default": "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+    },
+    "badges": {
+      "default": "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+      "secondary": "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+      "outline": "text-foreground"
+    }
+  },
+  "layouts": {
+    "dashboard_grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6",
+    "bento_grid": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[180px]",
+    "chat_layout": "grid grid-cols-1 lg:grid-cols-[350px_1fr_300px] h-[calc(100vh-4rem)] overflow-hidden"
+  },
+  "assets": {
+    "images": {
+      "login_hero": "https://images.pexels.com/photos/8386656/pexels-photo-8386656.jpeg",
+      "user_avatar_placeholder": "https://images.pexels.com/photos/6129494/pexels-photo-6129494.jpeg",
+      "product_placeholder": "https://images.pexels.com/photos/16947161/pexels-photo-16947161.jpeg",
+      "qr_placeholder": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Example"
+    },
+    "icons": {
+      "library": "lucide-react",
+      "style": "stroke-width={1.5}"
+    }
+  },
+  "page_rules": {
+    "login": {
+      "layout": "Split screen. Left: 50% width image (login_hero) with dark overlay and branding. Right: 50% width clean form.",
+      "elements": ["Logo", "Email Input", "Password Input", "Sign In Button", "Forgot Password Link"]
+    },
+    "dashboard": {
+      "layout": "Sidebar navigation (left). Top header (search, profile). Main content area with Bento Grid.",
+      "widgets": [
+        {"title": "Total Revenue", "type": "stat_card", "size": "small"},
+        {"title": "Active Chats", "type": "stat_card", "size": "small"},
+        {"title": "Pending Orders", "type": "stat_card", "size": "small"},
+        {"title": "Conversion Rate", "type": "stat_card", "size": "small"},
+        {"title": "Sales Trend", "type": "chart_area", "size": "large (col-span-2)"},
+        {"title": "Recent Orders", "type": "list", "size": "medium (col-span-2)"}
+      ]
+    },
+    "chat": {
+      "layout": "Three pane. 1. Conversation List (Search, Filter, List Items). 2. Chat Window (Header, Messages, Input). 3. Context Panel (Customer Info, Order History, AI Suggestions).",
+      "features": ["AI Suggestion Chip", "Product Card in Chat", "Payment Link Button"]
+    }
+  },
+  "universal_guidelines": [
+    "Do not use gradients for backgrounds. Use solid colors or subtle noise textures.",
+    "Use 'Manrope' for all headings and 'Inter' for body text.",
+    "Ensure all interactive elements have hover states.",
+    "Use 'sonner' for all toast notifications.",
+    "All charts must use the defined 'chart_colors'.",
+    "Add 'data-testid' to all interactive elements.",
+    "Never use generic 'Lorem Ipsum'. Use realistic fashion retail data.",
+    "The 'AI' features should be highlighted with the 'accent' color (Lime #D4FF33) to stand out against the 'primary' (Emerald #044736)."
+  ]
+}
