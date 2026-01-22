@@ -440,8 +440,10 @@ async def receive_meta_message(request: Request):
             return {"status": "ok"}
             
         change = body["entry"][0]["changes"][0]["value"]
+        logger.info(f"Change value: {change}")
         
         if "messages" not in change:
+            logger.info("No messages in change, ignoring (probably a status update)")
             return {"status": "ok"}
             
         message = change["messages"][0]
